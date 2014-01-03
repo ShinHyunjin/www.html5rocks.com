@@ -64,10 +64,16 @@
   {% endif %}
   <link rel="publisher" href="https://plus.google.com/111395306401981598462">
 
+  {% if localizations %}
+  {% for alt_locale in localizations %}
+  <link rel="alternate" hreflang="{{alt_locale.loc}}" href="{{host}}{{alt_locale.path}}">
+  {% endfor %}
+  {% endif %}
+
   {% if css_file %}
-  <link rel="stylesheet" media="all" href="/static/css/{{css_file}}{% if prod %}.min{% endif %}.css?20130806">
+  <link rel="stylesheet" media="all" href="/static/css/{{css_file}}{% if prod %}.min{% endif %}.css?20131111">
   {% else %}
-  <link rel="stylesheet" media="all" href="/static/css/base{% if prod %}.min{% endif %}.css?20130806">
+  <link rel="stylesheet" media="all" href="/static/css/base{% if prod %}.min{% endif %}.css?20131111">
   {% endif %}
   <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,800|Source+Code+Pro" rel="stylesheet">
 
@@ -353,12 +359,6 @@
 
   <script>
   (function() {
-    {% if is_mobile %}
-      // Hides mobile browser's address bar when page is done loading.
-      window.addEventListener('load', function(e) {
-        setTimeout(function() { window.scrollTo(0, 1); }, 1);
-      }, false);
-    {% endif %}
 
     $(document).keydown(function(e) {
       if (e.keyCode === 27) { // ESC
